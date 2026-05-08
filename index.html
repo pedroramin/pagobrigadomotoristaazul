@@ -3,515 +3,174 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Motorista no Azul | Próximo Passo</title>
+  <title>Motorista no Azul | Oferta Especial</title>
   <style>
     :root {
       --bg: #050607;
       --card: #11151a;
-      --card-2: #171d24;
       --text: #f8fafc;
       --muted: #a8b3c0;
       --yellow: #facc15;
       --green: #22c55e;
-      --red: #ef4444;
-      --border: rgba(255, 255, 255, 0.11);
-      --shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+      --blue: #1d6dff;
+      --border: rgba(255,255,255,.12);
+      --shadow: 0 28px 80px rgba(0,0,0,.45);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 14% 8%, rgba(250, 204, 21, 0.15), transparent 30%),
-        radial-gradient(circle at 86% 12%, rgba(34, 197, 94, 0.14), transparent 32%),
-        linear-gradient(180deg, #050607 0%, #080b0e 100%);
+      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      line-height: 1.5;
-    }
-
-    .page {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 24px 0 50px;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 18px;
-      padding-bottom: 24px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 950;
-      letter-spacing: -0.04em;
-    }
-
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--yellow), var(--green));
-      color: #061008;
-      box-shadow: 0 14px 32px rgba(34, 197, 94, 0.18);
-      font-weight: 950;
-    }
-
-    .brand small {
-      display: block;
-      color: var(--muted);
-      font-size: 0.78rem;
-      letter-spacing: 0;
-      font-weight: 800;
-    }
-
-    .secure {
-      color: #bbf7d0;
-      border: 1px solid rgba(34, 197, 94, 0.25);
-      background: rgba(34, 197, 94, 0.08);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .step {
-      display: none;
-      animation: fade 0.25s ease;
-    }
-
-    .step.active {
-      display: block;
-    }
-
-    @keyframes fade {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 0.88fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.035));
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .copy-card {
-      padding: 34px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(250, 204, 21, 0.11);
-      color: var(--yellow);
-      border: 1px solid rgba(250, 204, 21, 0.22);
-      font-weight: 950;
-      font-size: 0.84rem;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      font-size: clamp(2rem, 4.3vw, 4.35rem);
-      line-height: 0.96;
-      letter-spacing: -0.08em;
-      margin-bottom: 16px;
-    }
-
-    h1 span {
-      color: var(--yellow);
-    }
-
-    .lead {
-      color: var(--muted);
-      font-size: clamp(1rem, 1.45vw, 1.14rem);
-      margin-bottom: 22px;
-      max-width: 720px;
-    }
-
-    .notice {
-      padding: 15px;
-      border-radius: 20px;
-      background: rgba(34, 197, 94, 0.09);
-      border: 1px solid rgba(34, 197, 94, 0.22);
-      color: #bbf7d0;
-      font-weight: 850;
-      margin-bottom: 20px;
-    }
-
-    .benefits {
-      display: grid;
-      gap: 10px;
-      margin: 20px 0 24px;
-    }
-
-    .benefit {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      padding: 13px 14px;
-      border: 1px solid var(--border);
-      background: rgba(0, 0, 0, 0.22);
-      border-radius: 18px;
-      color: #e5e7eb;
-      font-weight: 800;
-    }
-
-    .benefit b {
-      color: var(--green);
-    }
-
-    .check {
-      width: 23px;
-      height: 23px;
-      flex: 0 0 auto;
-      display: grid;
-      place-items: center;
-      border-radius: 999px;
-      color: #061008;
-      background: var(--green);
-      font-weight: 950;
-      margin-top: 1px;
-    }
-
-    .offer-box {
-      border: 1px solid rgba(34, 197, 94, 0.28);
-      background: linear-gradient(135deg, rgba(34, 197, 94, 0.12), rgba(250, 204, 21, 0.08));
-      border-radius: 24px;
-      padding: 18px;
-      margin-bottom: 18px;
-    }
-
-    .price-row {
-      display: flex;
-      align-items: flex-end;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin: 8px 0 4px;
-    }
-
-    .old-price {
-      color: var(--muted);
-      text-decoration: line-through;
-      font-weight: 900;
-      font-size: 1.05rem;
-    }
-
-    .price {
-      color: var(--green);
-      font-size: clamp(2rem, 4vw, 3.3rem);
-      line-height: 1;
-      font-weight: 950;
-      letter-spacing: -0.07em;
-    }
-
-    .small {
-      color: var(--muted);
-      font-size: 0.92rem;
-      font-weight: 750;
-    }
-
-    .actions {
-      display: grid;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .primary-btn,
-    .secondary-btn,
-    .download-btn {
-      width: 100%;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      text-decoration: none;
-      border: 0;
-      cursor: pointer;
-      border-radius: 18px;
-      padding: 17px 22px;
-      font-size: 1rem;
-      font-weight: 950;
-      transition: 0.18s ease;
-      text-align: center;
-    }
-
-    .primary-btn,
-    .download-btn {
-      background: linear-gradient(135deg, var(--yellow), var(--green));
-      color: #061008;
-      box-shadow: 0 18px 36px rgba(34, 197, 94, 0.18);
-    }
-
-    .secondary-btn {
-      background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-    }
-
-    .primary-btn:hover,
-    .secondary-btn:hover,
-    .download-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .visual-card {
-      padding: 20px;
-      display: grid;
-      align-content: center;
       background:
-        linear-gradient(135deg, rgba(250, 204, 21, 0.08), transparent),
-        linear-gradient(45deg, rgba(34, 197, 94, 0.10), transparent),
-        var(--card);
+        radial-gradient(circle at 10% 0%, rgba(250,204,21,.14), transparent 28%),
+        radial-gradient(circle at 90% 0%, rgba(34,197,94,.14), transparent 30%),
+        #050607;
+      line-height: 1.45;
     }
-
-    .product-mockup {
-      width: 100%;
-      display: block;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 24px 70px rgba(0,0,0,0.48);
-      object-fit: cover;
-      aspect-ratio: 4 / 5;
-      background: #080b0e;
-    }
-
-    .mobile-offer-image {
-      display: none;
-      margin: 8px 0 22px;
-    }
-
-    .mobile-offer-image img {
-      width: 100%;
-      display: block;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,0.10);
-      box-shadow: 0 20px 58px rgba(0,0,0,0.45);
-    }
-
-    .final-card {
-      width: min(760px, 100%);
-      margin: 0 auto;
-      text-align: center;
-      padding: 40px;
-    }
-
-    .success-icon {
-      width: 78px;
-      height: 78px;
-      margin: 0 auto 18px;
-      border-radius: 28px;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(135deg, var(--yellow), var(--green));
-      color: #061008;
-      font-size: 36px;
-      font-weight: 950;
-      box-shadow: 0 20px 42px rgba(34, 197, 94, 0.2);
-    }
-
-    .downloads {
-      display: grid;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .legal {
-      color: var(--muted);
-      font-size: 0.86rem;
-      margin-top: 18px;
-    }
-
+    .page { width: min(1120px, calc(100% - 28px)); margin: 0 auto; padding: 22px 0 54px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 22px; }
+    .brand { text-decoration: none; text-transform: uppercase; font-weight: 950; letter-spacing: -.04em; line-height: .9; display: inline-flex; flex-direction: column; padding: 9px 12px; border: 1px solid rgba(250,204,21,.25); background: rgba(0,0,0,.35); border-radius: 14px; }
+    .brand .top { color: #fff; font-size: 1.08rem; }
+    .brand .bottom { font-size: 1.36rem; display: flex; gap: 6px; }
+    .yellow { color: var(--yellow); }
+    .blue { color: var(--blue); }
+    .secure { color: #bbf7d0; background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.25); border-radius: 999px; padding: 10px 14px; font-size: .88rem; font-weight: 800; }
+    .step { display: none; animation: fade .22s ease; }
+    .step.active { display: block; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .hero { display: grid; grid-template-columns: 1fr .9fr; gap: 24px; align-items: stretch; }
+    .card { background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.035)); border: 1px solid var(--border); border-radius: 30px; box-shadow: var(--shadow); overflow: hidden; }
+    .copy { padding: 34px; }
+    .tag { display: inline-flex; padding: 8px 12px; border-radius: 999px; color: var(--yellow); background: rgba(250,204,21,.11); border: 1px solid rgba(250,204,21,.22); font-weight: 900; font-size: .86rem; margin-bottom: 16px; }
+    .notice { padding: 15px; border-radius: 18px; background: rgba(34,197,94,.09); border: 1px solid rgba(34,197,94,.23); color: #bbf7d0; font-weight: 800; margin-bottom: 20px; }
+    h1 { font-size: clamp(2rem, 4.4vw, 4.4rem); line-height: .96; letter-spacing: -.07em; margin-bottom: 18px; }
+    h1 span { color: var(--yellow); }
+    .lead { color: var(--muted); font-size: clamp(1rem, 1.45vw, 1.15rem); margin-bottom: 22px; }
+    .mobile-img { display: none; margin: 6px 0 20px; }
+    .mobile-img img, .mockup { width: 100%; display: block; border-radius: 24px; border: 1px solid rgba(255,255,255,.1); box-shadow: 0 24px 70px rgba(0,0,0,.48); }
+    .visual { padding: 20px; display: grid; place-items: center; }
+    .benefits { display: grid; gap: 10px; margin: 20px 0 22px; }
+    .benefit { display: flex; gap: 11px; align-items: flex-start; padding: 13px 14px; border: 1px solid var(--border); border-radius: 18px; background: rgba(0,0,0,.22); font-weight: 780; color: #e5e7eb; }
+    .check { width: 24px; height: 24px; border-radius: 50%; flex: 0 0 auto; display: grid; place-items: center; background: var(--green); color: #061008; font-weight: 950; }
+    .benefit b { color: var(--green); }
+    .offer { border: 1px solid rgba(34,197,94,.28); background: linear-gradient(135deg, rgba(34,197,94,.12), rgba(250,204,21,.08)); border-radius: 24px; padding: 18px; margin: 18px 0; }
+    .price-row { display: flex; align-items: end; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+    .old { color: var(--muted); text-decoration: line-through; font-weight: 900; font-size: 1.05rem; }
+    .price { color: var(--green); font-size: clamp(2rem,4vw,3.2rem); line-height: 1; font-weight: 950; letter-spacing: -.06em; }
+    .small { color: var(--muted); font-size: .92rem; font-weight: 700; }
+    .actions { display: grid; gap: 12px; margin-top: 18px; }
+    .primary, .secondary, .download { display: inline-flex; width: 100%; justify-content: center; align-items: center; text-align: center; border-radius: 18px; padding: 17px 22px; font-size: 1rem; font-weight: 950; text-decoration: none; border: 0; cursor: pointer; transition: .18s ease; }
+    .primary, .download { background: linear-gradient(135deg, var(--yellow), var(--green)); color: #061008; box-shadow: 0 18px 36px rgba(34,197,94,.18); }
+    .secondary { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+    .primary:hover, .secondary:hover, .download:hover { transform: translateY(-2px); }
+    .legal { color: var(--muted); font-size: .84rem; margin-top: 16px; }
+    .final { width: min(760px, 100%); margin: 0 auto; text-align: center; padding: 40px; }
+    .success { width: 78px; height: 78px; margin: 0 auto 18px; border-radius: 26px; display: grid; place-items: center; background: linear-gradient(135deg, var(--yellow), var(--green)); color: #061008; font-size: 38px; font-weight: 950; }
+    .downloads { display: grid; gap: 12px; margin-top: 22px; }
     @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .visual-card {
-        display: none;
-      }
-
-      .mobile-offer-image {
-        display: block;
-      }
+      .hero { grid-template-columns: 1fr; }
+      .visual { display: none; }
+      .mobile-img { display: block; }
     }
-
     @media (max-width: 620px) {
-      .page {
-        width: min(100% - 22px, 1120px);
-        padding-top: 18px;
-      }
-      .topbar {
-        align-items: flex-start;
-      }
-      .secure {
-        display: none;
-      }
-      .copy-card,
-      .visual-card,
-      .final-card {
-        padding: 18px;
-        border-radius: 24px;
-      }
-      .product-mockup {
-        border-radius: 20px;
-        max-height: none;
-      }
-      h1 {
-        font-size: clamp(2rem, 12vw, 3.35rem);
-      }
+      .secure { display: none; }
+      .copy, .final { padding: 20px; border-radius: 24px; }
+      h1 { font-size: clamp(2rem, 12vw, 3.2rem); }
+      .brand .top { font-size: .9rem; }
+      .brand .bottom { font-size: 1.12rem; }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <header class="topbar">
-      <div class="brand">
-        <div class="brand-icon">$</div>
-        <div>
-          Motorista no Azul
-          <small>Controle, lucro real e clareza no volante</small>
-        </div>
-      </div>
+      <a href="#" class="brand" aria-label="Motorista no Azul">
+        <span class="top">Motorista</span>
+        <span class="bottom"><span class="yellow">no</span><span class="blue">azul</span></span>
+      </a>
       <div class="secure">Compra segura • Acesso digital</div>
     </header>
 
     <section class="step active" id="step-calculadora">
       <div class="hero">
-        <div class="card copy-card">
+        <div class="card copy">
           <div class="tag">Oferta exclusiva pós-compra</div>
           <div class="notice">Sua compra principal foi aprovada. Antes de acessar seu material, você tem uma oferta exclusiva disponível somente nesta página.</div>
           <h1>Quer calcular seu lucro <span>automaticamente?</span></h1>
-          <p class="lead">Você acabou de adquirir o ebook Motorista no Azul, que mostra o que analisar para entender seu lucro real. Agora, você pode adicionar a ferramenta que faz essas contas automaticamente todos os meses.</p>
-
-          <div class="mobile-offer-image">
-            <img src="https://i.imgur.com/zr4vmeg.png" alt="Mockup da Calculadora Mensal do Motorista" />
-          </div>
-
+          <p class="lead">Você acabou de adquirir o ebook Motorista no Azul. Agora, pode adicionar a ferramenta que faz as contas automaticamente todos os meses.</p>
+          <div class="mobile-img"><img src="https://i.imgur.com/zr4vmeg.png" alt="Mockup da Calculadora Mensal do Motorista"></div>
           <div class="benefits">
             <div class="benefit"><div class="check">✓</div><div>Descubra seu <b>lucro líquido do mês</b> depois dos custos.</div></div>
             <div class="benefit"><div class="check">✓</div><div>Veja <b>custo por km, lucro por km, lucro por dia e lucro por hora</b>.</div></div>
             <div class="benefit"><div class="check">✓</div><div>Receba uma <b>meta diária sugerida</b> para o próximo mês.</div></div>
             <div class="benefit"><div class="check">✓</div><div>Pare de depender de conta de cabeça no fim do mês.</div></div>
           </div>
-
-          <div class="offer-box">
-            <strong>Adicione agora a Calculadora Mensal do Motorista</strong>
-            <div class="price-row">
-              <div class="old-price">De R$ 47,00</div>
-              <div class="price">R$ 27,00</div>
-            </div>
+          <div class="offer">
+            <strong>Adicione a Calculadora Mensal do Motorista</strong>
+            <div class="price-row"><div class="old">De R$ 47,00</div><div class="price">R$ 27,00</div></div>
             <div class="small">Oferta única nesta etapa. Produto digital com acesso imediato.</div>
           </div>
-
           <div class="actions">
-            <a class="primary-btn" href="LINK_CHECKOUT_CALCULADORA">Sim, quero adicionar à minha compra</a>
-            <button class="secondary-btn" type="button" data-next="step-plano">Não, obrigado. Quero acessar apenas o ebook</button>
+            <a class="primary" href="https://checkout.ticto.app/O4DFE588B">Sim, quero adicionar à minha compra</a>
+            <button class="secondary" type="button" data-next="step-plano">Não, obrigado. Quero acessar apenas o ebook</button>
           </div>
-
           <p class="legal">Ferramenta educativa. Não garante aumento de ganhos. Os resultados dependem dos dados informados e da rotina de cada motorista.</p>
         </div>
-
-        <div class="card visual-card">
-          <img class="product-mockup" src="https://i.imgur.com/zr4vmeg.png" alt="Mockup da Calculadora Mensal do Motorista" />
-        </div>
+        <div class="card visual"><img class="mockup" src="https://i.imgur.com/zr4vmeg.png" alt="Mockup da Calculadora Mensal do Motorista"></div>
       </div>
     </section>
 
     <section class="step" id="step-plano">
       <div class="hero">
-        <div class="card copy-card">
+        <div class="card copy">
           <div class="tag">Última oferta complementar</div>
           <div class="notice">Tudo certo. Você escolheu continuar sem a calculadora. Antes de ir para a página final, existe um complemento mais simples para aplicar o conteúdo do ebook nos próximos 7 dias.</div>
           <h1>Coloque o controle em prática em <span>7 dias.</span></h1>
           <p class="lead">O Plano de 7 Dias é um material prático para sair do achismo, anotar o que importa e começar a enxergar se suas corridas estão deixando lucro de verdade.</p>
-
-          <div class="mobile-offer-image">
-            <img src="https://i.imgur.com/g785rTw.jpeg" alt="Mockup do Plano de 7 Dias Motorista no Azul" />
-          </div>
-
+          <div class="mobile-img"><img src="https://i.imgur.com/g785rTw.jpeg" alt="Mockup do Plano de 7 Dias Motorista no Azul"></div>
           <div class="benefits">
             <div class="benefit"><div class="check">✓</div><div>Uma missão simples por dia para não travar.</div></div>
             <div class="benefit"><div class="check">✓</div><div>Ajuda a separar faturamento, custos e lucro real.</div></div>
             <div class="benefit"><div class="check">✓</div><div>Mostra o que observar na rotina antes de rodar mais.</div></div>
             <div class="benefit"><div class="check">✓</div><div>Complemento perfeito para aplicar o ebook principal.</div></div>
           </div>
-
-          <div class="offer-box">
+          <div class="offer">
             <strong>Adicione o Plano de 7 Dias - Motorista no Azul</strong>
-            <div class="price-row">
-              <div class="old-price">De R$ 27,00</div>
-              <div class="price">R$ 9,90</div>
-            </div>
+            <div class="price-row"><div class="old">De R$ 27,00</div><div class="price">R$ 9,90</div></div>
             <div class="small">Produto digital em PDF. Ideal para começar hoje mesmo.</div>
           </div>
-
           <div class="actions">
-            <a class="primary-btn" href="LINK_CHECKOUT_PLANO_7_DIAS">Sim, quero adicionar à minha compra</a>
-            <button class="secondary-btn" type="button" data-next="step-final">Não, obrigado. Finalizar e acessar meu ebook</button>
+            <a class="primary" href="https://checkout.ticto.app/OA861E30B">Sim, quero adicionar à minha compra</a>
+            <button class="secondary" type="button" data-next="step-final">Não, obrigado. Finalizar e acessar meu ebook</button>
           </div>
-
           <p class="legal">Material educativo. Não garante aumento de ganhos. O objetivo é ajudar o motorista a aplicar o controle com mais clareza.</p>
         </div>
-
-        <div class="card visual-card">
-          <img class="product-mockup" src="https://i.imgur.com/g785rTw.jpeg" alt="Mockup do Plano de 7 Dias Motorista no Azul" />
-        </div>
+        <div class="card visual"><img class="mockup" src="https://i.imgur.com/g785rTw.jpeg" alt="Mockup do Plano de 7 Dias Motorista no Azul"></div>
       </div>
     </section>
 
     <section class="step" id="step-final">
-      <div class="card final-card">
-        <div class="success-icon">✓</div>
+      <div class="card final">
+        <div class="success">✓</div>
         <div class="tag">Compra concluída</div>
         <h1>Sua compra foi <span>concluída.</span></h1>
-        <p class="lead">Agora você já pode baixar seu material principal. Salve o arquivo no celular ou computador para acessar sempre que precisar.</p>
-
+        <p class="lead">Agora você já pode baixar seu material principal. Caso tenha comprado algum adicional, o acesso também será enviado pela plataforma para o e-mail cadastrado.</p>
         <div class="downloads">
-          <a class="download-btn" href="Motorista_no_Azul_Ebook_Principal_Revisado.pdf" download>Baixar ebook Motorista no Azul</a>
-          <a class="secondary-btn" href="LINK_SUPORTE_OU_WHATSAPP">Preciso de ajuda com meu acesso</a>
+          <a class="download" href="Motorista_no_Azul_Ebook_Principal_Revisado.pdf" download>Baixar ebook Motorista no Azul</a>
+          <a class="secondary" href="/">Voltar para a página inicial</a>
         </div>
-
-        <p class="legal">Caso tenha comprado algum adicional, o acesso também será enviado conforme as instruções da plataforma de pagamento.</p>
+        <p class="legal">Verifique também sua caixa de entrada, spam ou promoções.</p>
       </div>
     </section>
   </main>
 
   <script>
-    const steps = document.querySelectorAll(".step");
-    const nextButtons = document.querySelectorAll("[data-next]");
-
-    function showStep(id) {
-      steps.forEach((step) => step.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    nextButtons.forEach((button) => {
-      button.addEventListener("click", () => showStep(button.dataset.next));
+    document.querySelectorAll('[data-next]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.step').forEach((step) => step.classList.remove('active'));
+        document.getElementById(button.dataset.next).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
   </script>
 </body>
